@@ -1,0 +1,107 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+
+[[plugins]]
+repo = 'joshdick/onedark.vim'
+hook_add = '''
+  colorscheme onedark
+'''
+
+[[plugins]]
+repo = 'w0rp/ale'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+  source ~/.config/nvim/pluginsettings/gitgutter.vim
+'''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_add = '''
+  source ~/.config/nvim/pluginsettings/fugitive.vim
+'''
+
+# Do not work well...
+# [[plugins]]
+# repo = 'Shougo/denite.nvim'
+# hook_add = '''
+#   source ~/.config/nvim/pluginsettings/denite.vim
+# '''
+
+[[plugins]]
+repo = 'osyo-manga/vim-anzu'
+hook_add = '''
+  source ~/.config/nvim/pluginsettings/anzu.vim
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+  source ~/.config/nvim/pluginsettings/vim-airline.vim
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+  source ~/.config/nvim/pluginsettings/nerdtree.vim
+'''
+
+[[plugins]]
+repo = 'kana/vim-submode'
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build  = './install --all'
+merged = 0
+hook_add = '''
+
+  source ~/.config/nvim/pluginsettings/fzf.vim
+  " ref: https://qiita.com/miyanokomiya/items/ae8990b3bd5fed4f9825
+  command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'ag --hidden --ignore .git -g ""'}), <bang>0)
+  command! -bang -nargs=* Ag
+    \ call fzf#vim#grep(
+    \   'ag --column --color --hidden --ignore .git '.shellescape(<q-args>), 0,
+    \   <bang>0 ? fzf#vim#with_preview('up:60%')
+    \           : fzf#vim#with_preview('right:50%', '?'),
+    \   <bang>0)
+'''
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = ['fzf']
+hook_add = '''
+  source ~/.config/nvim/pluginsettings/fzf_vim.vim
+'''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+# Language Server Protocol
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_add = 'source ~/.config/nvim/pluginsettings/vim-lsp.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+hook_add = 'source ~/.config/nvim/pluginsettings/asyncomplete_vim.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
