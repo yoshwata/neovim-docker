@@ -2,7 +2,7 @@ FROM alpine:3.10
 # FROM ubuntu:xenial
 
 # RUN apt-get update && echo hoge && apt-get install -y \
-RUN apk update && apk --no-cache add \
+RUN apk --no-cache add \
     musl \
     bash \
     git \
@@ -14,10 +14,18 @@ RUN apk update && apk --no-cache add \
     zlib \
     libressl-dev \
     libffi-dev \
-    musl-dev \
-    libc6-compat \
     neovim \
+    libc6-compat \
     the_silver_searcher
+
+RUN apk --no-cache add \
+    nodejs \
+    npm
+
+RUN npm install -g \
+    typescript \
+    typescript-language-server \
+    eslint
 
 SHELL ["/bin/bash", "-c"]
 
@@ -41,7 +49,7 @@ RUN curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.
 COPY .config/ /root/.config/
 COPY .vimrc /root/.config/nvim/.vimrc
 
-# RUN /bin/bash -c 'nvim -c ":silent! call dein#install() | :q"'
+RUN /bin/bash -c 'nvim -c ":silent! call dein#install() | :q"'
 # RUN nvim +PlugInstall +qa
 
 # RUN git clone https://github.com/anyenv/anyenv ~/.anyenv \
@@ -56,10 +64,10 @@ COPY .vimrc /root/.config/nvim/.vimrc
 #     && nodenv global 8.15.1 \
 #     && nodenv local 8.15.1 \
 #     && npm install -g typescript typescript-language-server \
-#     && npm install -g eslint
-    # && anyenv install pyenv \
-    # && source ~/.bash_profile \ 
-    # && pyenv install 3.6.1 \
-    # && pyenv global 3.6.1 \
-    # && pyenv local 3.6.1 \
-    # && pip3 install --user pynvim
+#     && npm install -g eslint \
+#     && anyenv install pyenv \
+#     && source ~/.bash_profile \ 
+#     && pyenv install 3.6.1 \
+#     && pyenv global 3.6.1 \
+#     && pyenv local 3.6.1 \
+#     && pip3 install --user pynvim
