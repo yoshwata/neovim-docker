@@ -1,23 +1,30 @@
-FROM ubuntu:xenial
+FROM alpine:3.10
+# FROM ubuntu:xenial
 
-SHELL ["/bin/bash", "-c"]
-
-RUN apt-get update && echo hoge && apt-get install -y \
+# RUN apt-get update && echo hoge && apt-get install -y \
+RUN apk update && apk --no-cache add \
+    musl \
+    bash \
     git \
     rsync \
     ncurses-dev \
     make \
     gcc \
     curl \
-    zlib1g-dev \
-    libssl-dev \
+    zlib \
+    libressl-dev \
     libffi-dev \
-    silversearcher-ag
+    musl-dev \
+    libc6-compat \
+    neovim \
+    the_silver_searcher
 
-RUN cd \
-    && curl -L -O https://github.com/neovim/neovim/releases/download/v0.3.4/nvim-linux64.tar.gz \
-    && tar zxvf nvim-linux64.tar.gz \
-    && ln -s /root/nvim-linux64/bin/nvim /usr/local/bin/nvim
+SHELL ["/bin/bash", "-c"]
+
+# RUN cd \
+#     && curl -L -O https://github.com/neovim/neovim/releases/download/v0.3.4/nvim-linux64.tar.gz \
+#     && tar zxvf nvim-linux64.tar.gz \
+#     && ln -s /root/nvim-linux64/bin/nvim /usr/local/bin/nvim
 
 # install neovim from ppa
 # RUN apt-get install software-properties-common -y
@@ -35,21 +42,21 @@ COPY .config/ /root/.config/
 COPY .vimrc /root/.config/nvim/.vimrc
 
 # RUN /bin/bash -c 'nvim -c ":silent! call dein#install() | :q"'
-RUN nvim +PlugInstall +qa
+# RUN nvim +PlugInstall +qa
 
-RUN git clone https://github.com/anyenv/anyenv ~/.anyenv \
-    && echo 'export PATH="$HOME/.anyenv/bin:$PATH"' >> ~/.bash_profile \
-    && source ~/.bash_profile \
-    && anyenv install --force-init \
-    && echo 'eval "$(anyenv init -)"' >> ~/.bash_profile \
-    && source ~/.bash_profile \
-    && anyenv install nodenv \
-    && source ~/.bash_profile \
-    && nodenv install 8.15.1 \
-    && nodenv global 8.15.1 \
-    && nodenv local 8.15.1 \
-    && npm install -g typescript typescript-language-server \
-    && npm install -g eslint
+# RUN git clone https://github.com/anyenv/anyenv ~/.anyenv \
+#     && echo 'export PATH="$HOME/.anyenv/bin:$PATH"' >> ~/.bash_profile \
+#     && source ~/.bash_profile \
+#     && anyenv install --force-init \
+#     && echo 'eval "$(anyenv init -)"' >> ~/.bash_profile \
+#     && source ~/.bash_profile \
+#     && anyenv install nodenv \
+#     && source ~/.bash_profile \
+#     && nodenv install 8.15.1 \
+#     && nodenv global 8.15.1 \
+#     && nodenv local 8.15.1 \
+#     && npm install -g typescript typescript-language-server \
+#     && npm install -g eslint
     # && anyenv install pyenv \
     # && source ~/.bash_profile \ 
     # && pyenv install 3.6.1 \
