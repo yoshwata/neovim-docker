@@ -71,7 +71,7 @@ endif
 " Add indent auto
 set autoindent
 " Auto indent depth
-set shiftwidth=4
+set shiftwidth=2
 " Use whitespace to tab
 set expandtab
 " ctag settings
