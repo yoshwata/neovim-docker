@@ -67,7 +67,6 @@ repo = 'junegunn/fzf'
 build  = './install --all'
 merged = 0
 hook_add = '''
-
   source ~/.config/nvim/pluginsettings/fzf.vim
   " ref: https://qiita.com/miyanokomiya/items/ae8990b3bd5fed4f9825
   command! -bang -nargs=? -complete=dir Files
